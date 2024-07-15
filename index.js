@@ -5,8 +5,7 @@ import errorHandler from './middlewares/errorHandler.js';
 import usersRouter from './routes/usersRouter.js';
 import authRouter from './routes/authRouter.js';
 import BooksRouter from './routes/booksRouter.js';
-
-
+import auth from './middlewares/auth.js';
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -15,8 +14,12 @@ app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 
+
+
+
 app.use('/users', usersRouter);
 
+app.use('/', BooksRouter);
 app.use('/books', BooksRouter);
 
 

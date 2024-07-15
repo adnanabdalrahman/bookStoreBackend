@@ -1,19 +1,27 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
-const ProductSchema = new Schema({
-    name: {
+const BookSchema = new Schema({
+    title: {
         type: String,
         required: true
     },
-    price: {
+    author: {
         type: Number,
-        required: true
     },
-    description: {
+    publishDate: {
         type: String
+    },
+    genre: {
+        type: String
+    },
+    description: { type: String },
+    image: { type: String },
+    date: { type: Date, default: Date.now },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
-    // Add other product fields as needed
 });
 
-export default model('Product', ProductSchema);
+export default model('Book', BookSchema);
