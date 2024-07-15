@@ -5,8 +5,6 @@ import jwt from 'jsonwebtoken';
 
 
 
-const jwtSecret = process.env.jwtSecret;
-
 export const registerUser = asyncHandler(async (req, res, next) => {
     try {
         const { firstname, lastname, email, password } = req.body;
@@ -43,6 +41,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
             return res.status(400).json({ msg: 'Invalid credentials' });
         }
 
+        const jwtSecret = process.env.jwtSecret;
         const payload = { userId: user._id };
         const token = jwt.sign(payload, jwtSecret, { expiresIn: '1h' });
 

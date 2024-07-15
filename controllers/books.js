@@ -2,15 +2,6 @@ import Book from '../models/Book.js';
 import asyncHandler from '../utils/asyncHandler.js';
 import ErrorResponse from '../utils/ErrorResponse.js';
 
-export const getAllBooks = asyncHandler(async (req, res, next) => {
-    const books = await Book.find().sort({ date: -1 });
-    res.json(books);
-});
-
-export const getAllUserbooks = asyncHandler(async (req, res, next) => {
-    const books = await Book.find().sort({ date: -1 });
-    res.json(books);
-});
 
 export const createBook = asyncHandler(async (req, res, next) => {
     try {
@@ -20,11 +11,30 @@ export const createBook = asyncHandler(async (req, res, next) => {
     } catch (error) {
         res.status(500).send(err.message);
     }
-
 });
 
+
+
+
+
+
+
+
+
+export const getAllBooks = asyncHandler(async (req, res, next) => {
+    res.send('Hello from getAllBooks');
+    const books = await Book.find().sort({ date: -1 });
+    res.json(books);
+});
+
+export const getAllUserbooks = asyncHandler(async (req, res, next) => {
+    const books = await Book.find().sort({ date: -1 });
+    res.json(books);
+});
+
+
+
 export const getSingleBook = asyncHandler(async (req, res, next) => {
-    res.send(req.params)
     const {
         params: { bookId }
     } = req;
