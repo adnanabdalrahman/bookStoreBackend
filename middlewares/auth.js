@@ -3,6 +3,8 @@ const jwtSecret = process.env.jwtSecret;
 
 function auth(req, res, next) {
     const token = req.header('x-auth-token');
+    res.header('Access-Control-Allow-Origin', '*');
+    res.send('Hello from auth');
     if (!token) {
         return res.status(401).json({ msg: 'No token, authorization denied' });
     }

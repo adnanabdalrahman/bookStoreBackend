@@ -10,9 +10,12 @@ import {
 } from '../controllers/books.js';
 
 const BooksRouter = Router();
+BooksRouter.route('/').get(auth, getAllBooks);
+
+
 BooksRouter.route('/').get(auth, getAllUserbooks).post(auth, createBook);;
 
-// BooksRouter.route('/').get(getAllBooks);
+
 
 
 BooksRouter.route('/:bookId').get(auth, getSingleBook);
