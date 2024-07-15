@@ -8,20 +8,6 @@ export const getAllBooks = asyncHandler(async (req, res, next) => {
 });
 
 export const getAllUserbooks = asyncHandler(async (req, res, next) => {
-
-    const token = req.header('x-auth-token');
-    if (!token) {
-        return res.status(401).json({ msg: 'No token, authorization denied' });
-    }
-
-    try {
-        const decoded = jwt.verify(token, jwtSecret);
-        req.user = decoded.userId;
-        res.send(userId);
-    } catch (err) {
-        res.status(401).json({ msg: 'Token is not valid' });
-    }
-
     const books = await Book.find().sort({ date: -1 });
     res.json(books);
 });
@@ -29,7 +15,7 @@ export const getAllUserbooks = asyncHandler(async (req, res, next) => {
 export const createBook = asyncHandler(async (req, res, next) => {
     try {
         const { body } = req;
-        const newBook = await Book.create({ ...body });
+        const newBook = await Book.create({ ...body, user: req.user });
         res.status(201).json(newBook);
     } catch (error) {
         res.status(500).send(err.message);

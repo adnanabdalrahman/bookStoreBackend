@@ -1,5 +1,5 @@
 import { Router } from 'express';
-
+import auth from '../middlewares/auth.js';
 import {
     createBook,
     deleteBook,
@@ -10,11 +10,12 @@ import {
 } from '../controllers/books.js';
 
 const BooksRouter = Router();
+BooksRouter.route('/').get(auth, getAllUserbooks).post(auth, createBook);;
 
-BooksRouter.route('/').get(getAllBooks);
-BooksRouter.route('/:bookId').get(getSingleBook);
+// BooksRouter.route('/').get(getAllBooks);
 
-BooksRouter.route('/:userId/:bookId').get(getSingleBook).put(updateBook).delete(deleteBook);
-BooksRouter.route('/:userId/:bookId').get(getAllUserbooks).post(createBook);;
+
+BooksRouter.route('/:bookId').get(auth, getSingleBook);
+BooksRouter.route('/:bookId').get(auth, getSingleBook).put(auth, updateBook).delete(auth, deleteBook);
 
 export default BooksRouter;
