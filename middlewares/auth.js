@@ -1,14 +1,11 @@
 import jwt from 'jsonwebtoken';
-const jwtSecret = process.env.JWTSECRET;
+const jwtSecret = "open sesame";
 
 function auth(req, res, next) {
     const token = req.header('x-auth-token');
-    res.header('Access-Control-Allow-Origin', '*');
-    res.send('Hello from auth');
     if (!token) {
         return res.status(401).json({ msg: 'No token, authorization denied' });
     }
-
     try {
         const decoded = jwt.verify(token, jwtSecret);
         req.user = decoded.userId;

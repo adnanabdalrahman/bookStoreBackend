@@ -13,19 +13,15 @@ export const createBook = asyncHandler(async (req, res, next) => {
     }
 });
 
-
-
-
-
-
-
-
-
 export const getAllBooks = asyncHandler(async (req, res, next) => {
-    res.send('Hello from getAllBooks');
     const books = await Book.find().sort({ date: -1 });
     res.json(books);
 });
+
+
+
+
+
 
 export const getAllUserbooks = asyncHandler(async (req, res, next) => {
     const books = await Book.find().sort({ date: -1 });

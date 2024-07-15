@@ -3,7 +3,7 @@ import asyncHandler from '../utils/asyncHandler.js';
 import ErrorResponse from '../utils/ErrorResponse.js';
 import jwt from 'jsonwebtoken';
 
-const jwtSecret = process.env.JWTSECRET;
+const jwtSecret = "open sesame";
 
 
 export const registerUser = asyncHandler(async (req, res, next) => {
